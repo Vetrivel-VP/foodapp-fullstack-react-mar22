@@ -25,7 +25,7 @@ const App = () => {
         <UserProvider>
           <Header />
 
-          <section className="h-[90vh] md:h-[85vh] w-[90vw] md:w-[80vw] bg-slate-400 mb-4 overflow-y-scroll scrollbar-none">
+          <section className="h-[90vh] md:h-[85vh] w-[90vw] md:w-[80vw mb-4 overflow-y-scroll scrollbar-none">
             <Routes>
               <Route path="/*" element={<MainContainer />} />
               <Route path="/menu" element={<FoodMenuContainer />} />

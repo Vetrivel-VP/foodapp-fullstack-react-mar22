@@ -34,6 +34,8 @@ module.exports = {
       colors: {
         textColor: "#101010",
         activeText: "#D6230A",
+        gradientBg: "rgba(116, 249, 105,0.4)",
+        whiteAlpha: "rgba(255,255,255,0.2)",
       },
     },
   },
