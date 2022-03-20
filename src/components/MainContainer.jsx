@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/AuthContext";
 import Hero from "../img/hero.png";
-import { IoAlarm } from "react-icons/io5";
+import { IoAlarm, IoAdd } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 
 const MainContainer = () => {
@@ -10,6 +10,7 @@ const MainContainer = () => {
   return (
     <AnimatePresence>
       <div className="w-full h-full flex flex-col items-center justify-start">
+        {/* Hero section */}
         <div className=" flex flex-col items-center justify-center h-auto relative">
           <motion.img
             initial={{ opacity: 0, scale: 0.6 }}
@@ -54,6 +55,8 @@ const MainContainer = () => {
             </p>
           </motion.div>
         </div>
+
+        {/* Hero paragraph sections */}
         <motion.p
           initial={{ opacity: 0, y: 200 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,6 +75,123 @@ const MainContainer = () => {
           alongside wonderfull colors and fragnances, eating a large serving of
           fresh.
         </motion.p>
+
+        {/* Hotest dishes */}
+        <section className="w-full h-screen flex flex-col items-center mt-12">
+          <p className="text-[2rem] text-textColor font-semibold relative before:absolute before:content before:w-24 before:h-1 before:rounded-md before:bg-emerald-400 before:bottom-0 before:left-24">
+            Our new hotest dishes
+          </p>
+          <div className="w-full my-8 p-12 flex flex-wrap gap-16 items-center justify-between">
+            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
+                  alt="item"
+                  className="w-full h-full rounded-full object-cover"
+                />
+              </div>
+              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
+                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
+                  Fresh and healthy pizza
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
+                  60 calories
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <div className="w-full flex items-center justify-between mt-1">
+                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
+                    $ 2.64
+                  </p>
+                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
+                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
+                  alt="item"
+                  className="w-full h-full rounded-full object-cover"
+                />
+              </div>
+              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
+                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
+                  Fresh and healthy pizza
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
+                  60 calories
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <div className="w-full flex items-center justify-between mt-1">
+                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
+                    $ 2.64
+                  </p>
+                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
+                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
+                  alt="item"
+                  className="w-full h-full rounded-full object-cover"
+                />
+              </div>
+              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
+                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
+                  Fresh and healthy pizza
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
+                  60 calories
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <div className="w-full flex items-center justify-between mt-1">
+                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
+                    $ 2.64
+                  </p>
+                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
+                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
+                  alt="item"
+                  className="w-full h-full rounded-full object-cover"
+                />
+              </div>
+              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
+                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
+                  Fresh and healthy pizza
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
+                  60 calories
+                </p>
+                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
+                <div className="w-full flex items-center justify-between mt-1">
+                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
+                    $ 2.64
+                  </p>
+                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
+                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </AnimatePresence>
   );

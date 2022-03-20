@@ -6,6 +6,7 @@ module.exports = {
         320: "320px",
       },
       width: {
+        150: "150px",
         190: "190px",
         225: "225px",
         275: "275px",
@@ -20,6 +21,8 @@ module.exports = {
       },
       height: {
         80: "80px",
+        150: "150px",
+        300: "300px",
         340: "340px",
         370: "370px",
         420: "420px",
@@ -39,6 +42,7 @@ module.exports = {
         activeText: "#D6230A",
         gradientBg: "rgba(116, 249, 105,0.4)",
         whiteAlpha: "rgba(255,255,255,0.2)",
+        cardColor: "#f5f5f5",
       },
       screens: {
         sm: "640px",
