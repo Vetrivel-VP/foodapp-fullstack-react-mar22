@@ -19,3 +19,9 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .newDishCard {
+    @apply w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative;
+  }
+}

@@ -82,7 +82,7 @@ const MainContainer = () => {
             Our new hotest dishes
           </p>
           <div className="w-full my-8 p-12 flex flex-wrap gap-16 items-center justify-between">
-            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+            <div className="group newDishCard">
               <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
@@ -109,7 +109,7 @@ const MainContainer = () => {
                 </div>
               </div>
             </div>
-            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+            <div className="group newDishCard">
               <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
@@ -136,7 +136,7 @@ const MainContainer = () => {
                 </div>
               </div>
             </div>
-            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+            <div className="group newDishCard">
               <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
@@ -163,7 +163,7 @@ const MainContainer = () => {
                 </div>
               </div>
             </div>
-            <div className="group w-225 h-auto p-4 rounded-2xl shadow-2xl duration-100 ease-in-out bg-cardColor backdrop-blur-md hover:shadow-none hover:bg-gradient-to-bl from-emerald-400 to-emerald-700 flex flex-col items-center justify-center relative">
+            <div className="group newDishCard">
               <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
