@@ -3,7 +3,7 @@ import { IoAdd } from "react-icons/io5";
 
 const NewDishes = ({ data }) => {
   return (
-    <div className="group newDishCard">
+    <div className="group newDishCard min-w-[250px]">
       <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 bg-cardColor">
         <img
           src={data?.imageURL}
@@ -17,7 +17,7 @@ const NewDishes = ({ data }) => {
         </p>
         <div className="w-full h-[1px] bg-slate-200 my-1"></div>
         <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
-          {data?.calories}
+          {data?.calories} Calories
         </p>
         <div className="w-full h-[1px] bg-slate-200 my-1"></div>
         <div className="w-full flex items-center justify-between mt-1">

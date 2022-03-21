@@ -180,7 +180,7 @@ const CreateItem = () => {
                 <option
                   key={category.id}
                   className="text-base border-0 outline-none capitalize bg-white text-black"
-                  value={category.name}
+                  value={category.urlParamName}
                 >
                   {category.name}
                 </option>
