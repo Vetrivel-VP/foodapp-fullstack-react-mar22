@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../context/AuthContext";
 import Hero from "../img/hero.png";
 import { IoAlarm, IoAdd } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
+import NewDishes from "./NewDishes";
+import { FoodContext } from "../context/FoodItemsContext";
 
 const MainContainer = () => {
   const { user, setUser } = useContext(UserContext);
+  const { foodItems, setFoodItems } = useContext(FoodContext);
 
   return (
     <AnimatePresence>
@@ -82,114 +85,15 @@ const MainContainer = () => {
             Our new hotest dishes
           </p>
           <div className="w-full my-8 p-12 flex flex-wrap gap-16 items-center justify-between">
-            <div className="group newDishCard">
-              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
-                  alt="item"
-                  className="w-full h-full rounded-full object-cover"
-                />
-              </div>
-              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
-                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
-                  Fresh and healthy pizza
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
-                  60 calories
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <div className="w-full flex items-center justify-between mt-1">
-                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
-                    $ 2.64
-                  </p>
-                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
-                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="group newDishCard">
-              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
-                  alt="item"
-                  className="w-full h-full rounded-full object-cover"
-                />
-              </div>
-              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
-                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
-                  Fresh and healthy pizza
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
-                  60 calories
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <div className="w-full flex items-center justify-between mt-1">
-                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
-                    $ 2.64
-                  </p>
-                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
-                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="group newDishCard">
-              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
-                  alt="item"
-                  className="w-full h-full rounded-full object-cover"
-                />
-              </div>
-              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
-                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
-                  Fresh and healthy pizza
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
-                  60 calories
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <div className="w-full flex items-center justify-between mt-1">
-                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
-                    $ 2.64
-                  </p>
-                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
-                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="group newDishCard">
-              <div className="w-150 h-150 rounded-full shadow-2xl absolute -top-12 ">
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fpizza2.png?alt=media&token=e9b65d7f-bd12-4c33-b172-729f1dfcf461"
-                  alt="item"
-                  className="w-full h-full rounded-full object-cover"
-                />
-              </div>
-              <div className="w-full flex flex-col items-center justify-center  mt-24 cursor-pointer">
-                <p className="text-2xl text-textColor group-hover:text-gray-100 text-center font-semibold my-2">
-                  Fresh and healthy pizza
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <p className="text-lg text-gray-500 group-hover:text-gray-100 font-normal my-1">
-                  60 calories
-                </p>
-                <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-                <div className="w-full flex items-center justify-between mt-1">
-                  <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
-                    $ 2.64
-                  </p>
-                  <div className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center">
-                    <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            {Array.apply(null, { length: 4 }).map((data, i) => (
+              <NewDishes
+                key={i + 1}
+                data={
+                  foodItems &&
+                  foodItems[Math.floor(Math.random() * foodItems.length - 1)]
+                }
+              />
+            ))}
           </div>
         </section>
       </div>

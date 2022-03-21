@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Contact from "./components/Contact";
 import CreateItem from "./components/CreateItem";
@@ -7,10 +7,25 @@ import Header from "./components/Header";
 import MainContainer from "./components/MainContainer";
 import UserProfile from "./components/UserProfile";
 import { UserContext } from "./context/AuthContext";
+import { FoodContext } from "./context/FoodItemsContext";
 import BG from "./img/bg.png";
 import MobileBg from "./img/mobileBg.png";
+import { getAllFoodItems } from "./utils/firebaseFunctions";
 
 const App = () => {
+  const { foodItems, setFoodItems } = useContext(FoodContext);
+
+  const fetchFoodItems = async () => {
+    await getAllFoodItems().then((data) => {
+      setFoodItems(data);
+    });
+  };
+
+  useEffect(() => {
+    fetchFoodItems();
+  }, []);
+  useEffect(() => {}, [foodItems]);
+
   return (
     <div className="w-screen h-screen flex items-center justify-center relative overflow-hidden">
       <img
