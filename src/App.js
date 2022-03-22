@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import CheckOutContainer from "./components/CheckOutContainer";
 import Contact from "./components/Contact";
 import CreateItem from "./components/CreateItem";
 import FoodMenuContainer from "./components/FoodMenuContainer";
@@ -51,6 +52,8 @@ const App = () => {
           </Routes>
         </section>
       </main>
+
+      <CheckOutContainer />
     </div>
   );
 };
