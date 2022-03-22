@@ -44,7 +44,6 @@ const App = () => {
         <section className="h-[90vh] md:h-[85vh] w-[90vw] md:w-[80vw mb-4 overflow-y-scroll scrollbar-none">
           <Routes>
             <Route path="/*" element={<MainContainer />} />
-            <Route path="/menu" element={<FoodMenuContainer />} />
             <Route path="/search/:searchId" element={<FoodMenuContainer />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/userProfile" element={<UserProfile />} />

@@ -1,8 +1,12 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { categories } from "../utils/data";
 import { IoFastFood } from "react-icons/io5";
 import NewDishes from "./NewDishes";
+import { FoodContext } from "../context/FoodItemsContext";
+import Loader from "./Loader";
+import NotFound from "../img/NotFound.svg";
+import { AnimatePresence, motion } from "framer-motion";
 
 const activeStyles =
   "group hover:bg-red-400 w-24 min-w-[94px] h-28 cursor-pointer rounded-lg bg-red-400 shadow-lg flex flex-col gap-3 items-center justify-center duration-150 transition-all ease-in-out";
@@ -10,60 +14,98 @@ const activeStyles =
 const notActiveStyles =
   "group hover:bg-red-400 w-24 min-w-[94px] h-28 cursor-pointer rounded-lg bg-cardColor shadow-lg flex flex-col gap-3 items-center justify-center duration-150 transition-all ease-in-out";
 
-const data = {
-  id: "1647820416809",
-  calories: "120",
-  category: "chicken",
-  imageURL:
-    "https://firebasestorage.googleapis.com/v0/b/foodapp-mar22.appspot.com/o/Images%2F1647820363190-kebab.png?alt=media&token=0c23a6a5-17fc-4f75-b209-4a50bd537ece",
-  price: "10",
-  title: "Chicken Kebab",
-};
-
 const FoodMenuContainer = () => {
-  return (
-    <div className=" flex flex-col items-center justify-center ">
-      {/* Menus */}
-      <div className="w-full flex flex-col items-center justify-center gap-3 p-4 ">
-        <p className="text-2xl text-gray-700 font-semibold relative before:rounded-lg before:animate-pulse  before:absolute before:content before:w-20 before:h-1 before:-bottom-1 before:left-4 before:bg-green-700 transition-all ease-in-out duration-100">
-          Our Menu
-        </p>
+  const [isLoading, setIsLoading] = useState(false);
+  const [items, setItems] = useState([]);
+  const { searchId } = useParams();
 
-        <div className="w-full flex items-center justify-start lg:justify-center gap-8 mt-6 overflow-x-scroll scrollbar-none p-4">
-          {categories &&
-            categories.map((category) => (
-              <NavLink
-                key={category.id}
-                to={`/search/${category.urlParamName}`}
-                className={({ isActive }) =>
-                  isActive ? activeStyles : notActiveStyles
-                }
-              >
-                <div className="w-10  h-10 rounded-full bg-red-400 group-hover:bg-white flex items-center justify-center">
-                  <IoFastFood className="text-white group-hover:text-textColor" />
-                </div>
-                <p className="text-lg text-textColor group-hover:text-white font-normal">
-                  {category.name}
-                </p>
-              </NavLink>
-            ))}
+  const { foodItems, setFoodItems } = useContext(FoodContext);
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (searchId) {
+      setItems(foodItems?.filter((n) => n.category === searchId));
+      setIsLoading(false);
+    }
+  }, [searchId]);
+
+  return (
+    <AnimatePresence>
+      <div className=" flex flex-col items-center justify-center ">
+        {/* Menus */}
+        <div className="w-full flex flex-col items-center justify-center gap-3 p-4 ">
+          <p className="text-2xl text-gray-700 font-semibold relative before:rounded-lg before:animate-pulse  before:absolute before:content before:w-20 before:h-1 before:-bottom-1 before:left-4 before:bg-green-700 transition-all ease-in-out duration-100">
+            Our Menu
+          </p>
+
+          <div className="w-full flex items-center justify-start lg:justify-center gap-8 mt-6 overflow-x-scroll scrollbar-none p-4">
+            {categories &&
+              categories.map((category) => (
+                <Link key={category.id} to={`/search/${category.urlParamName}`}>
+                  <div
+                    className={
+                      category.urlParamName === searchId
+                        ? activeStyles
+                        : notActiveStyles
+                    }
+                  >
+                    <div
+                      className={`w-10  h-10 rounded-full ${
+                        category.urlParamName === searchId
+                          ? "bg-cardColor"
+                          : "bg-red-400"
+                      } group-hover:bg-white flex items-center justify-center`}
+                    >
+                      <IoFastFood
+                        className={`${
+                          category.urlParamName === searchId
+                            ? "text-textColor"
+                            : "text-white"
+                        } group-hover:text-textColor`}
+                      />
+                    </div>
+                    <p
+                      className={`text-lg ${
+                        category.urlParamName === searchId
+                          ? "text-white"
+                          : "text-textColor"
+                      }  group-hover:text-white font-normal`}
+                    >
+                      {category.name}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
+
+        <div className="w-full px-12 py-8 mt-12 flex flex-wrap items-center justify-center gap-16 ">
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              {items.length > 0 ? (
+                <>
+                  {items.map((item) => (
+                    <NewDishes key={item.id} data={item} />
+                  ))}
+                </>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.6 }}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <img src={NotFound} className="w-275" alt="" />
+                  <p className="text-3xl">Not Available</p>
+                </motion.div>
+              )}
+            </>
+          )}
         </div>
       </div>
-
-      <div className="w-full px-12 py-8 mt-12 flex flex-wrap items-center justify-center gap-16 ">
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-        <NewDishes data={data} />
-      </div>
-    </div>
+    </AnimatePresence>
   );
 };
 

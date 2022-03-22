@@ -44,12 +44,15 @@ const Header = () => {
     setIsMobileMenu(false);
     localStorage.clear();
     setUser(null);
+    setCartItems([]);
   };
 
   return (
     <AnimatePresence>
-      <div className="w-full px-8 py-2 flex items-center justify-center  ">
+      <div className="w-full px-2 lg:px-8 py-2 flex items-center justify-center  ">
+        {/* desktop menu */}
         <div className="w-full hidden md:flex items-center">
+          {/* user menu */}
           <div className=" mr-auto relative">
             <motion.img
               whileTap={{ scale: 0.8 }}
@@ -87,9 +90,10 @@ const Header = () => {
             )}
           </div>
 
+          {/* menu actions */}
           <div className="flex items-center">
             <NavLink
-              to={"/menu"}
+              to={"/search/chicken"}
               className={({ isActive }) =>
                 isActive ? isActiveStyles : isNotActiveStyles
               }
@@ -115,7 +119,7 @@ const Header = () => {
           >
             <MdShoppingCart className="text-xl text-white" />
             <p className="text-base text-white font-semibold">My Cart</p>
-            {cartItems.length > 0 && (
+            {cartItems && cartItems.length > 0 && (
               <div className="w-6 h-6 rounded-sm bg-yellow-500 absolute -top-3 right-2 border border-white flex items-center justify-center">
                 <p className="text-base font-semibold">{cartItems.length}</p>
               </div>
@@ -123,7 +127,9 @@ const Header = () => {
           </motion.div>
         </div>
 
+        {/* mobile menu */}
         <div className="w-full flex md:hidden items-center">
+          {/* logo */}
           <NavLink to={"/"}>
             <motion.img
               whileTap={{ scale: 0.8 }}
@@ -132,6 +138,8 @@ const Header = () => {
               alt=""
             />
           </NavLink>
+
+          {/* user menu */}
 
           <div className="relative ml-auto cursor-pointer ">
             <motion.img
@@ -209,7 +217,7 @@ const Header = () => {
                 >
                   <MdShoppingCart className="text-xl text-white" />
                   <p className="text-base text-white font-semibold">My Cart</p>
-                  {cartItems.length > 0 && (
+                  {cartItems && cartItems.length > 0 && (
                     <div className="w-6 h-6 rounded-sm bg-yellow-500 absolute -top-3 right-2 border border-white flex items-center justify-center">
                       <p className="text-base font-semibold">
                         {cartItems.length}
