@@ -17,7 +17,7 @@ const isActiveStyles =
 const isNotActiveStyles =
   "text-textColor hover:text-green-700 text-xl font-semibold before:rounded-lg relative hover:before:animate-pulse  hover:before:absolute hover:before:content hover:before:w-5 hover:before:h-1 hover:before:bottom-0 hover:before:left-5 hover:before:bg-green-700 transition-all ease-in-out duration-100";
 
-const Header = () => {
+const Header = ({ setCartMenu }) => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const firebaseDb = getFirestore(app);
@@ -116,6 +116,7 @@ const Header = () => {
           <motion.div
             whileTap={{ scale: 0.8 }}
             className="flex items-center gap-2 bg-black px-6 py-4 rounded-md ml-auto cursor-pointer relative"
+            onClick={() => setCartMenu(true)}
           >
             <MdShoppingCart className="text-xl text-white" />
             <p className="text-base text-white font-semibold">My Cart</p>
@@ -213,7 +214,10 @@ const Header = () => {
                 <motion.div
                   whileTap={{ scale: 0.8 }}
                   className="flex items-center gap-2 bg-black px-6 py-4 rounded-md cursor-pointer relative"
-                  onClick={() => setIsMobileMenu(false)}
+                  onClick={() => {
+                    setIsMobileMenu(false);
+                    setCartMenu(true);
+                  }}
                 >
                   <MdShoppingCart className="text-xl text-white" />
                   <p className="text-base text-white font-semibold">My Cart</p>

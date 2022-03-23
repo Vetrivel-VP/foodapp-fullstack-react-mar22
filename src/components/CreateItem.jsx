@@ -109,6 +109,7 @@ const CreateItem = () => {
           imageURL: imageAsset,
           category: category,
           calories: calories,
+          qty: 1,
           price: price,
         };
 

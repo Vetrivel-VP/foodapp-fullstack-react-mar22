@@ -7,8 +7,9 @@ export const CartContextProvider = ({ children }) => {
   const cartInfo = fetchCart();
 
   const [cartItems, setCartItems] = useState(cartInfo ? cartInfo : []);
+  const [flag, setFlag] = useState(false);
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems }}>
+    <CartContext.Provider value={{ cartItems, setCartItems, flag, setFlag }}>
       {children}
     </CartContext.Provider>
   );
