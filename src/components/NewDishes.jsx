@@ -1,33 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoAdd } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
-import { CartContext } from "../context/CartContext";
-import { fetchCart } from "../utils/fetchCart";
 
-const NewDishes = ({ data }) => {
-  const { cartItems, setCartItems, flag, setFlag } = useContext(CartContext);
-
-  const updateCartItem = (data) => {
-    // console.log(data);
-    const sameData = cartItems.filter((n) => n.id === data?.id);
-    if (sameData.length > 0) {
-      cartItems.map((item) => {
-        if (sameData[0].id === item.id) {
-          item.qty += 1;
-        }
-      });
-      setFlag(!flag);
-      setCartItems(cartItems);
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    } else {
-      setCartItems([...cartItems, data]);
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      setFlag(!flag);
-    }
-  };
-
-  useEffect(() => {}, [cartItems, flag]);
-
+const NewDishes = ({ data, setCart, cart }) => {
   return (
     <AnimatePresence>
       <motion.div
@@ -68,18 +43,20 @@ const NewDishes = ({ data }) => {
             {data?.calories} Calories
           </p>
           <div className="w-full h-[1px] bg-slate-200 my-1"></div>
-          <div className="w-full flex items-center justify-between mt-1">
-            <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
-              $ {data?.price}
-            </p>
-            <div
-              className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center"
-              // onClick={() => setCartItems([...cartItems, data])}
-              onClick={() => updateCartItem(data)}
-            >
-              <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
+          {setCart && (
+            <div className="w-full flex items-center justify-between mt-1">
+              <p className="text-2xl text-textColor group-hover:text-gray-100 font-semibold">
+                $ {data?.price}
+              </p>
+              <div
+                className="w-10 h-10 rounded-xl bg-yellow-500 group-hover:bg-cardColor flex items-center justify-center"
+                // onClick={() => setCartItems([...cartItems, data])}
+                onClick={() => setCart([...cart, data])}
+              >
+                <IoAdd className="text-2xl text-white group-hover:text-emerald-500 font-semibold" />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>

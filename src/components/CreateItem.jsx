@@ -219,7 +219,7 @@ const CreateItem = () => {
                     />
                     <button
                       type="button"
-                      className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl 
+                      className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl
                   cursor-pointer outline-none hover:shadow-md duration-500 transition-all ease-in-out"
                       onClick={deleteImage}
                     >

@@ -3,10 +3,11 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import { categories } from "../utils/data";
 import { IoFastFood } from "react-icons/io5";
 import NewDishes from "./NewDishes";
-import { FoodContext } from "../context/FoodItemsContext";
 import Loader from "./Loader";
 import NotFound from "../img/NotFound.svg";
 import { AnimatePresence, motion } from "framer-motion";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 const activeStyles =
   "group hover:bg-red-400 w-24 min-w-[94px] h-28 cursor-pointer rounded-lg bg-red-400 shadow-lg flex flex-col gap-3 items-center justify-center duration-150 transition-all ease-in-out";
@@ -15,19 +16,30 @@ const notActiveStyles =
   "group hover:bg-red-400 w-24 min-w-[94px] h-28 cursor-pointer rounded-lg bg-cardColor shadow-lg flex flex-col gap-3 items-center justify-center duration-150 transition-all ease-in-out";
 
 const FoodMenuContainer = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [items, setItems] = useState([]);
-  const { searchId } = useParams();
+  const [{ foodItems, cartItems }, dispatch] = useStateValue();
 
-  const { foodItems, setFoodItems } = useContext(FoodContext);
+  const [cart, setCart] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [items, setItems] = useState(foodItems);
+  const { searchId } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
-    if (searchId) {
-      setItems(foodItems?.filter((n) => n.category === searchId));
-      setIsLoading(false);
+    // if (searchId) {
+    setItems(foodItems?.filter((n) => n.category === searchId));
+    setIsLoading(false);
+    // }
+  }, [searchId, foodItems]);
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      dispatch({
+        type: actionType.SET_CART,
+        cartItems: cart,
+      });
+      localStorage.setItem("cartItems", JSON.stringify(cart));
     }
-  }, [searchId]);
+  }, [cart]);
 
   return (
     <AnimatePresence>
@@ -84,10 +96,15 @@ const FoodMenuContainer = () => {
             <Loader />
           ) : (
             <>
-              {items.length > 0 ? (
+              {items && items.length > 0 ? (
                 <>
                   {items.map((item) => (
-                    <NewDishes key={item.id} data={item} />
+                    <NewDishes
+                      key={item.id}
+                      data={item}
+                      setCart={setCart}
+                      cart={cart}
+                    />
                   ))}
                 </>
               ) : (

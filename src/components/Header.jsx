@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import Logo from "../img/logo.png";
 import Avatar from "../img/avatar.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MdShoppingCart, MdLogout, MdAdd } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { app } from "../firebase.config";
-import { UserContext, UserProvider } from "../context/AuthContext";
-import { CartContext } from "../context/CartContext";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
+import CheckOutContainer from "./CheckOutContainer";
 
 const isActiveStyles =
   "text-green-700 font-semibold text-xl font-normal relative before:rounded-lg before:animate-pulse  before:absolute before:content before:w-5 before:h-1 before:bottom-0 before:left-4 before:bg-green-700 transition-all ease-in-out duration-100";
@@ -17,14 +17,16 @@ const isActiveStyles =
 const isNotActiveStyles =
   "text-textColor hover:text-green-700 text-xl font-semibold before:rounded-lg relative hover:before:animate-pulse  hover:before:absolute hover:before:content hover:before:w-5 hover:before:h-1 hover:before:bottom-0 hover:before:left-5 hover:before:bg-green-700 transition-all ease-in-out duration-100";
 
-const Header = ({ setCartMenu }) => {
+const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const firebaseDb = getFirestore(app);
-  const { user, setUser } = useContext(UserContext);
-  const { cartItems, setCartItems } = useContext(CartContext);
+
+  const [{ user, cartItems }, dispatch] = useStateValue();
+
+  const navigate = useNavigate();
 
   const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const [cartMenu, setCartMenu] = useState(false);
   const [isMenu, setIsMenu] = useState(false);
 
   const login = async () => {
@@ -32,20 +34,35 @@ const Header = ({ setCartMenu }) => {
       const { user } = await signInWithPopup(firebaseAuth, provider);
       const { refreshToken, providerData } = user;
       localStorage.setItem("user", JSON.stringify(providerData[0]));
-      setUser(providerData[0]);
+      dispatch({
+        type: actionType.SET_USER,
+        user: providerData[0],
+      });
     } else {
       setIsMenu(!isMenu);
       isMobileMenu(false);
     }
+    console.log(user);
   };
 
   const logout = () => {
     setIsMenu(false);
     setIsMobileMenu(false);
     localStorage.clear();
-    setUser(null);
-    setCartItems([]);
+    navigate("/", { replace: true });
+    dispatch({
+      type: actionType.SET_USER,
+      user: null,
+    });
+    dispatch({
+      type: actionType.SET_CART,
+      cartItems: [],
+    });
   };
+
+  useState(() => {
+    console.log(cartMenu);
+  }, [cartMenu]);
 
   return (
     <AnimatePresence>
@@ -116,7 +133,7 @@ const Header = ({ setCartMenu }) => {
           <motion.div
             whileTap={{ scale: 0.8 }}
             className="flex items-center gap-2 bg-black px-6 py-4 rounded-md ml-auto cursor-pointer relative"
-            onClick={() => setCartMenu(true)}
+            onClick={() => setCartMenu(!cartMenu)}
           >
             <MdShoppingCart className="text-xl text-white" />
             <p className="text-base text-white font-semibold">My Cart</p>
@@ -216,7 +233,7 @@ const Header = ({ setCartMenu }) => {
                   className="flex items-center gap-2 bg-black px-6 py-4 rounded-md cursor-pointer relative"
                   onClick={() => {
                     setIsMobileMenu(false);
-                    setCartMenu(true);
+                    setCartMenu(!cartMenu);
                   }}
                 >
                   <MdShoppingCart className="text-xl text-white" />
@@ -243,6 +260,17 @@ const Header = ({ setCartMenu }) => {
             )}
           </div>
         </div>
+
+        {cartMenu && (
+          <motion.div
+            initial={{ opacity: 0, x: 200 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 200 }}
+            className="fixed top-0 right-0 z-50"
+          >
+            <CheckOutContainer cartMenu={cartMenu} setCartMenu={setCartMenu} />
+          </motion.div>
+        )}
       </div>
     </AnimatePresence>
   );

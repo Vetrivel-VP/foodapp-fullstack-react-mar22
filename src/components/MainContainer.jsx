@@ -1,14 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import { UserContext } from "../context/AuthContext";
+import React, { useContext, useEffect, useState } from "react";
 import Hero from "../img/hero.png";
 import { IoAlarm, IoAdd } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import NewDishes from "./NewDishes";
-import { FoodContext } from "../context/FoodItemsContext";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 const MainContainer = () => {
-  const { user, setUser } = useContext(UserContext);
-  const { foodItems, setFoodItems } = useContext(FoodContext);
+  const [{ foodItems }, dispatch] = useStateValue();
 
   return (
     <AnimatePresence>

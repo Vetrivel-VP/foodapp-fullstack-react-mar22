@@ -1,16 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { RiRefreshFill } from "react-icons/ri";
-import { CartContext } from "../context/CartContext";
 import EmptyCart from "../img/emptyCart.svg";
 import CartItemCard from "./CartItemCard";
+import { motion } from "framer-motion";
+import { useStateValue } from "../context/StateProvider";
 
 const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
-  const { cartItems, flag } = useContext(CartContext);
-
+  const [{ user, cartItems, foodItems }, dispatch] = useStateValue();
+  const [total, setTotal] = useState(0);
   useEffect(() => {
-    console.log(flag);
-  }, [cartItems, flag, cartMenu]);
+    if (cartItems.length > 0) {
+      cartItems.map((n) => {
+        setTotal(parseFloat(n.price) * n.qty + total);
+      });
+    }
+  }, []);
+
+  useEffect(() => {}, [total]);
 
   return (
     <div className="w-full md:w-375 h-screen bg-white  drop-shadow-md  flex flex-col items-center justify-center">
@@ -26,13 +33,45 @@ const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
         </p>
       </div>
       {/* bottom */}
-      {cartItems.length !== 0 ? (
+      {cartItems && cartItems.length > 0 ? (
         <div className="w-full h-full bg-cartBg rounded-t-[2rem] flex flex-col">
-          <div className="w-full h-340 md:h-42 p-2 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
+          <div className="w-full h-340 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
             {cartItems &&
               cartItems.map((item) => (
                 <CartItemCard key={item.id} item={item} />
               ))}
+          </div>
+          <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-center px-8 py-2">
+            <div className="w-full flex items-center justify-between">
+              <p className="text-gray-400 text-lg">Sub Total</p>
+              <p className="text-gray-400 text-lg">$ 1</p>
+            </div>
+            <div className="w-full flex items-center justify-between">
+              <p className="text-gray-400 text-lg">Delivery</p>
+              <p className="text-gray-400 text-lg">$ 2.5</p>
+            </div>
+            <div className="w-full border-b border-gray-600 my-2"></div>
+            <div className="w-full flex items-center justify-between">
+              <p className="text-gray-200 text-xl font-semibold">Total</p>
+              <p className="text-gray-200 text-xl font-semibold">$ {total}</p>
+            </div>
+            {user ? (
+              <motion.button
+                whileTap={{ scale: 0.8 }}
+                type="button"
+                className="w-full p-2 rounded-full bg-yellow-600 text-gray-50 text-lg my-2 hover:shadow-lg transition-all duration-150 ease-out"
+              >
+                Check Out
+              </motion.button>
+            ) : (
+              <motion.button
+                whileTap={{ scale: 0.8 }}
+                type="button"
+                className="w-full p-2 rounded-full bg-yellow-600 text-gray-50 text-lg my-2 hover:shadow-lg transition-all duration-150 ease-out"
+              >
+                Login to check out
+              </motion.button>
+            )}
           </div>
         </div>
       ) : (
