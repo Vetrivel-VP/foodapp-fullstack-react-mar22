@@ -11,6 +11,6 @@ const total = fetchTotal();
 export const initialState = {
   user: userInfo,
   cartItems: cartInfo,
-  total: total,
+  total: [],
   foodItems: null,
 };

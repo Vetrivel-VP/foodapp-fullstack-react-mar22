@@ -6,8 +6,16 @@ import { useStateValue } from "../context/StateProvider";
 let items = [];
 
 const CartItemCard = ({ item }) => {
-  const [{ cartItems }, dispatch] = useStateValue();
+  const [{ cartItems, total }, dispatch] = useStateValue();
   const [qty, setQty] = useState(item.qty);
+
+  const cartDispatch = () => {
+    localStorage.setItem("cartItems", JSON.stringify(items));
+    dispatch({
+      type: actionType.SET_CART,
+      cartItems: items,
+    });
+  };
 
   const updateQty = (action, id) => {
     if (action == "add") {
@@ -17,21 +25,12 @@ const CartItemCard = ({ item }) => {
           item.qty += 1;
         }
       });
-      dispatch({
-        type: actionType.SET_CART,
-        cartItems: items,
-      });
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      cartDispatch();
     } else {
       // initial state value is one so you need to check if 1 then remove it
       if (qty == 1) {
-        items.pop(id);
-        console.log(items);
-        localStorage.setItem("cartItems", JSON.stringify(items));
-        dispatch({
-          type: actionType.SET_CART,
-          cartItems: items,
-        });
+        items = cartItems.filter((item) => item.id !== id);
+        cartDispatch();
       } else {
         setQty(qty - 1);
         cartItems.map((item) => {
@@ -39,11 +38,7 @@ const CartItemCard = ({ item }) => {
             item.qty -= 1;
           }
         });
-        dispatch({
-          type: actionType.SET_CART,
-          cartItems: items,
-        });
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        cartDispatch();
       }
     }
   };

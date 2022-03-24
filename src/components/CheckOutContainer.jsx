@@ -5,19 +5,27 @@ import EmptyCart from "../img/emptyCart.svg";
 import CartItemCard from "./CartItemCard";
 import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
-  const [{ user, cartItems, foodItems }, dispatch] = useStateValue();
-  const [total, setTotal] = useState(0);
-  useEffect(() => {
-    if (cartItems.length > 0) {
-      cartItems.map((n) => {
-        setTotal(parseFloat(n.price) * n.qty + total);
-      });
-    }
-  }, []);
+  const [{ user, cartItems, foodItems, total }, dispatch] = useStateValue();
+  const [tot, setTot] = useState(0);
 
-  useEffect(() => {}, [total]);
+  useEffect(() => {
+    let totalPrice = cartItems.reduce(function (accumulator, item) {
+      return accumulator + item.qty * item.price;
+    }, 0);
+    setTot(totalPrice);
+  }, [tot]);
+
+  const clearCart = () => {
+    dispatch({
+      type: actionType.SET_CART,
+      cartItems: [],
+    });
+
+    localStorage.setItem("cartItems", JSON.stringify([]));
+  };
 
   return (
     <div className="w-full md:w-375 h-screen bg-white  drop-shadow-md  flex flex-col items-center justify-center">
@@ -28,7 +36,10 @@ const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
           onClick={() => setCartMenu(false)}
         />
         <p className="text-textColor text-lg font-semibold">Cart</p>
-        <p className="flex items-center gap-2 p-1 px-2 my-2 bg-gray-100 rounded-md hover:shadow-md duration-100 ease-in-out transition-all cursor-pointer text-textColor text-base">
+        <p
+          className="flex items-center gap-2 p-1 px-2 my-2 bg-gray-100 rounded-md hover:shadow-md duration-100 ease-in-out transition-all cursor-pointer text-textColor text-base"
+          onClick={clearCart}
+        >
           Clear <RiRefreshFill />
         </p>
       </div>
@@ -44,7 +55,7 @@ const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
           <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-center px-8 py-2">
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Sub Total</p>
-              <p className="text-gray-400 text-lg">$ 1</p>
+              <p className="text-gray-400 text-lg">$ {tot}</p>
             </div>
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Delivery</p>
@@ -53,7 +64,9 @@ const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
             <div className="w-full border-b border-gray-600 my-2"></div>
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-200 text-xl font-semibold">Total</p>
-              <p className="text-gray-200 text-xl font-semibold">$ {total}</p>
+              <p className="text-gray-200 text-xl font-semibold">
+                $ {tot + 2.5}
+              </p>
             </div>
             {user ? (
               <motion.button

@@ -23,7 +23,7 @@ const reducer = (state, action) => {
     case actionType.SET_TOTAL:
       return {
         ...state,
-        total: action.total,
+        total: state.cartItems.map((item) => item.price),
       };
 
     case actionType.SET_FOOD_ITEMS:

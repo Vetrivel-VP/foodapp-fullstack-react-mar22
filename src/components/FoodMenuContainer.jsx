@@ -16,7 +16,7 @@ const notActiveStyles =
   "group hover:bg-red-400 w-24 min-w-[94px] h-28 cursor-pointer rounded-lg bg-cardColor shadow-lg flex flex-col gap-3 items-center justify-center duration-150 transition-all ease-in-out";
 
 const FoodMenuContainer = () => {
-  const [{ foodItems, cartItems }, dispatch] = useStateValue();
+  const [{ foodItems, cartItems, total }, dispatch] = useStateValue();
 
   const [cart, setCart] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +37,7 @@ const FoodMenuContainer = () => {
         type: actionType.SET_CART,
         cartItems: cart,
       });
-      localStorage.setItem("cartItems", JSON.stringify(cart));
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
   }, [cart]);
 
