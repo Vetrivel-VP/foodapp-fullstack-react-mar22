@@ -95,6 +95,8 @@ const MainContainer = () => {
             ))}
           </div>
         </section>
+
+        <section className="w-full h-225 bg-black flex flex-col items-center mt-12"></section>
       </div>
     </AnimatePresence>
   );

@@ -9,6 +9,7 @@ import { actionType } from "../context/reducer";
 
 const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
   const [{ user, cartItems, foodItems, total }, dispatch] = useStateValue();
+  const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
 
   useEffect(() => {
@@ -16,7 +17,8 @@ const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
       return accumulator + item.qty * item.price;
     }, 0);
     setTot(totalPrice);
-  }, [tot]);
+    console.log(tot);
+  }, [tot, flag]);
 
   const clearCart = () => {
     dispatch({
@@ -49,10 +51,15 @@ const CheckOutContainer = ({ cartMenu, setCartMenu }) => {
           <div className="w-full h-340 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
             {cartItems &&
               cartItems.map((item) => (
-                <CartItemCard key={item.id} item={item} />
+                <CartItemCard
+                  key={item.id}
+                  item={item}
+                  setFlag={setFlag}
+                  flag={flag}
+                />
               ))}
           </div>
-          <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-center px-8 py-2">
+          <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">Sub Total</p>
               <p className="text-gray-400 text-lg">$ {tot}</p>

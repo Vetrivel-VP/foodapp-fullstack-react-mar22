@@ -92,11 +92,11 @@ const Header = () => {
                     </p>
                   </NavLink>
                 )}
-                <NavLink to={"/userProfile"} onClick={() => setIsMenu(false)}>
+                {/* <NavLink to={"/userProfile"} onClick={() => setIsMenu(false)}>
                   <p className="px-4 py-2 cursor-pointer hover:bg-slate-200">
                     My Profile
                   </p>
-                </NavLink>
+                </NavLink> */}
                 <p
                   className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200"
                   onClick={logout}
@@ -121,7 +121,7 @@ const Header = () => {
               <img src={Logo} className="w-40 mx-16" alt="" />
             </NavLink>
             <NavLink
-              to={"/contact"}
+              to={"/"}
               className={({ isActive }) =>
                 isActive ? isActiveStyles : isNotActiveStyles
               }
@@ -196,7 +196,7 @@ const Header = () => {
                       New Item
                     </NavLink>
 
-                    <NavLink
+                    {/* <NavLink
                       to={"/userProfile"}
                       className={({ isActive }) =>
                         isActive ? isActiveStyles : isNotActiveStyles
@@ -204,7 +204,7 @@ const Header = () => {
                       onClick={() => setIsMobileMenu(false)}
                     >
                       My Profile
-                    </NavLink>
+                    </NavLink> */}
                   </>
                 )}
 
@@ -219,7 +219,7 @@ const Header = () => {
                 </NavLink>
 
                 <NavLink
-                  to={"/contact"}
+                  to={"/"}
                   className={({ isActive }) =>
                     isActive ? isActiveStyles : isNotActiveStyles
                   }
